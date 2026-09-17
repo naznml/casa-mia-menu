@@ -1,963 +1,1918 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f6f1e8">
-
-  <title>CASA MIA — Italian Restaurant</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #f6f1e8;
-      color: #20231e;
-      font-family: "Inter", sans-serif;
-      min-height: 100vh;
-    }
-
-    /* HERO */
-
-    .hero {
-      height: 390px;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.18),
-          rgba(0,0,0,.72)
-        ),
-        url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1400&q=85")
-        center/cover no-repeat;
-    }
-
-    .hero-content {
-      width: 100%;
-      padding: 35px 22px;
-      color: white;
-      text-align: center;
-    }
-
-    .small-title {
-      font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-      opacity: .9;
-    }
-
-    .hero h1 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 58px;
-      line-height: .9;
-      font-weight: 600;
-      letter-spacing: 2px;
-    }
-
-    .hero .subtitle {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 20px;
-      font-style: italic;
-      margin-top: 10px;
-      opacity: .95;
-    }
-
-    .location {
-      margin-top: 15px;
-      font-size: 12px;
-      letter-spacing: .4px;
-      opacity: .85;
-    }
-
-    /* LANGUAGE */
-
-    .language-box {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-
-      display: flex;
-      gap: 3px;
-
-      padding: 4px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-
-      border-radius: 30px;
-    }
-
-    .lang-btn {
-      border: 0;
-      background: transparent;
-      padding: 8px 13px;
-      border-radius: 25px;
-      cursor: pointer;
-
-      font-size: 11px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .lang-btn.active {
-      background: #24452f;
-      color: white;
-    }
-
-    /* INTRO */
-
-    .intro {
-      max-width: 700px;
-      margin: auto;
-      padding: 30px 22px 20px;
-      text-align: center;
-    }
-
-    .intro p {
-      color: #6e6e65;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 19px;
-      line-height: 1.45;
-    }
-
-    .ornament {
-      width: 45px;
-      height: 1px;
-      background: #9a7d4d;
-      margin: 20px auto 0;
-    }
-
-    /* CATEGORIES */
-
-    .category-wrapper {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-
-      background: rgba(246,241,232,.96);
-      backdrop-filter: blur(15px);
-
-      border-bottom: 1px solid rgba(0,0,0,.07);
-    }
-
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-
-      max-width: 900px;
-      margin: auto;
-
-      padding: 14px 15px;
-
-      scrollbar-width: none;
-    }
-
-    .categories::-webkit-scrollbar {
-      display: none;
-    }
-
-    .category {
-      flex: 0 0 auto;
-
-      border: 1px solid #d7d0c3;
-      background: transparent;
-
-      padding: 9px 17px;
-      border-radius: 30px;
-
-      font-size: 12px;
-      cursor: pointer;
-      color: #444;
-      transition: .2s;
-    }
-
-    .category.active {
-      background: #24452f;
-      color: white;
-      border-color: #24452f;
-    }
-
-    /* MENU */
-
-    .menu {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px 18px 70px;
-    }
-
-    .section {
-      scroll-margin-top: 80px;
-      margin-top: 35px;
-    }
-
-    .section-header {
-      margin-bottom: 20px;
-    }
-
-    .section-header span {
-      display: block;
-      color: #9a7d4d;
-      text-transform: uppercase;
-      font-size: 9px;
-      letter-spacing: 3px;
-      margin-bottom: 3px;
-    }
-
-    .section-header h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 35px;
-      font-weight: 600;
-    }
-
-    /* CARDS */
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .card {
-      background: #fffdf8;
-      border-radius: 17px;
-      overflow: hidden;
-      box-shadow: 0 5px 25px rgba(47,40,30,.06);
-    }
-
-    .card-image {
-      width: 100%;
-      height: 165px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-content {
-      padding: 15px;
-    }
-
-    .card h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      line-height: 1;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    .description {
-      color: #818077;
-      font-size: 11px;
-      line-height: 1.5;
-      min-height: 34px;
-    }
-
-    .price {
-      margin-top: 13px;
-      color: #24452f;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #1e3025;
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
-
-    footer h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 35px;
-      font-weight: 500;
-    }
-
-    footer p {
-      font-size: 11px;
-      opacity: .65;
-      margin-top: 8px;
-      line-height: 1.7;
-    }
-
-    footer .italy {
-      margin-top: 20px;
-      font-family: "Cormorant Garamond", serif;
-      font-style: italic;
-      font-size: 16px;
-      opacity: .8;
-    }
-
-    @media (max-width: 500px) {
-
-      .hero {
-        height: 340px;
-      }
-
-      .hero h1 {
-        font-size: 51px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .card {
-        display: grid;
-        grid-template-columns: 125px 1fr;
-        min-height: 135px;
-      }
-
-      .card-image {
-        height: 100%;
-        min-height: 135px;
-      }
-
-      .card-content {
-        padding: 14px;
-      }
-
-      .card h3 {
-        font-size: 20px;
-      }
-
-      .description {
-        min-height: auto;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0a">
+
+<title>CASA MIA — Cucina Italiana Contemporanea</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --black:#0b0b0a;
+  --black2:#11110f;
+  --cream:#f1eee6;
+  --muted:#a6a39b;
+  --line:rgba(255,255,255,.16);
+  --gold:#b99a62;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--cream);
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+button{
+  font-family:inherit;
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:50;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:25px 5%;
+}
+
+.logo{
+  font-family:"Cormorant Garamond",serif;
+  font-size:25px;
+  letter-spacing:3px;
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.lang{
+  display:flex;
+  gap:5px;
+}
+
+.lang button{
+  border:0;
+  background:transparent;
+  color:#aaa;
+  font-size:10px;
+  letter-spacing:1px;
+  cursor:pointer;
+  padding:7px;
+}
+
+.lang button.active{
+  color:white;
+  border-bottom:1px solid white;
+}
+
+.reserve{
+  border:1px solid rgba(255,255,255,.5);
+  background:transparent;
+  color:white;
+  padding:11px 18px;
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  height:100svh;
+  min-height:650px;
+
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+  linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.25),rgba(0,0,0,.82)),
+  url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=90")
+  center/cover no-repeat;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.35));
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  width:90%;
+}
+
+.eyebrow{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:5px;
+  margin-bottom:25px;
+  color:#ddd8cc;
+}
+
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(72px,13vw,170px);
+  font-weight:400;
+  line-height:.7;
+  letter-spacing:-3px;
+}
+
+.hero-subtitle{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:clamp(20px,3vw,34px);
+  margin-top:28px;
+}
+
+.hero-location{
+  margin-top:30px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:4px;
+  color:#ccc;
+}
+
+.scroll{
+  position:absolute;
+  z-index:3;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  font-size:8px;
+  letter-spacing:3px;
+  color:#ccc;
+}
+
+.scroll-line{
+  width:1px;
+  height:35px;
+  background:#aaa;
+  margin:10px auto 0;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+  min-height:80vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:100px 7%;
+}
+
+.intro-inner{
+  max-width:950px;
+  text-align:center;
+}
+
+.number{
+  color:var(--gold);
+  font-size:10px;
+  letter-spacing:4px;
+  margin-bottom:30px;
+}
+
+.intro h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(42px,7vw,85px);
+  font-weight:400;
+  line-height:1;
+}
+
+.intro p{
+  max-width:600px;
+  margin:35px auto 0;
+  font-size:12px;
+  line-height:2;
+  color:var(--muted);
+}
+
+/* =========================
+   BIG IMAGE
+========================= */
+
+.full-image{
+  width:92%;
+  margin:auto;
+  height:75vh;
+  min-height:500px;
+  overflow:hidden;
+}
+
+.full-image img{
+  height:100%;
+  object-fit:cover;
+}
+
+/* =========================
+   MENU INTRO
+========================= */
+
+.menu-title{
+  padding:130px 6% 60px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.menu-title h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(70px,12vw,150px);
+  font-weight:400;
+  line-height:.7;
+}
+
+.menu-title p{
+  max-width:300px;
+  font-size:10px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* =========================
+   CATEGORY NAV
+========================= */
+
+.category-bar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(11,11,10,.94);
+  backdrop-filter:blur(15px);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.categories{
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding:0 5%;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.cat{
+  flex:0 0 auto;
+  padding:20px 24px;
+  border:0;
+  background:none;
+  color:#777;
+  text-transform:uppercase;
+  font-size:9px;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+.cat.active{
+  color:white;
+}
+
+/* =========================
+   MENU SECTION
+========================= */
+
+.menu-section{
+  padding:110px 6%;
+  scroll-margin-top:60px;
+}
+
+.section-top{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  margin-bottom:60px;
+}
+
+.section-number{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+.section-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(45px,7vw,80px);
+  font-weight:400;
+}
+
+.food-list{
+  max-width:1000px;
+  margin-left:auto;
+}
+
+.food{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+
+  cursor:pointer;
+  transition:.3s;
+}
+
+.food:first-child{
+  border-top:1px solid var(--line);
+}
+
+.food:hover{
+  padding-left:15px;
+}
+
+.food-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(27px,4vw,42px);
+  font-weight:400;
+}
+
+.food-description{
+  margin-top:8px;
+  color:#777;
+  font-size:10px;
+  line-height:1.7;
+  max-width:550px;
+}
+
+.food-price{
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+  white-space:nowrap;
+}
+
+.tag{
+  display:inline-block;
+  margin-top:11px;
+  color:var(--gold);
+  font-size:7px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+/* =========================
+   CHEF FEATURE
+========================= */
+
+.chef-feature{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  min-height:750px;
+  margin:70px 0;
+}
+
+.chef-image{
+  overflow:hidden;
+}
+
+.chef-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.chef-copy{
+  background:#e9e4d8;
+  color:#151513;
+  padding:8%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.chef-copy .mini{
+  color:#806b47;
+  font-size:8px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+
+.chef-copy h2{
+  font-family:"Cormorant Garamond",serif;
+  font-weight:400;
+  font-size:clamp(50px,7vw,90px);
+  line-height:.9;
+  margin:30px 0;
+}
+
+.chef-copy p{
+  font-size:11px;
+  line-height:1.9;
+  max-width:450px;
+  color:#67645d;
+}
+
+.chef-price{
+  margin-top:35px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:27px;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+  min-height:65vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:80px 8%;
+  text-align:center;
+}
+
+.quote blockquote{
+  max-width:950px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(38px,6vw,75px);
+  font-weight:400;
+  font-style:italic;
+  line-height:1.05;
+}
+
+.quote span{
+  display:block;
+  margin-top:30px;
+  font-family:Inter,sans-serif;
+  font-style:normal;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:4px;
+  color:var(--gold);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-image{
+  height:60vh;
+  min-height:450px;
+  background:
+  linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.75)),
+  url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=90")
+  center/cover;
+}
+
+footer{
+  padding:80px 6% 35px;
+}
+
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:50px;
+}
+
+.footer-logo{
+  font-family:"Cormorant Garamond",serif;
+  font-size:55px;
+}
+
+.footer-label{
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:18px;
+}
+
+.footer-text{
+  color:#999;
+  font-size:10px;
+  line-height:2;
+}
+
+.footer-bottom{
+  border-top:1px solid var(--line);
+  margin-top:70px;
+  padding-top:25px;
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  font-size:8px;
+  letter-spacing:1px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(10px);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:#e9e4d8;
+  color:#151513;
+
+  width:min(900px,100%);
+  max-height:90vh;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  position:relative;
+  overflow:auto;
+}
+
+.modal-image{
+  height:600px;
+  object-fit:cover;
+}
+
+.modal-content{
+  padding:60px 45px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.modal-label{
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#8c7147;
+}
+
+.modal-content h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:55px;
+  font-weight:400;
+  line-height:.9;
+  margin:25px 0;
+}
+
+.modal-content p{
+  font-size:11px;
+  line-height:1.9;
+  color:#6c6962;
+}
+
+.modal-price{
+  font-family:"Cormorant Garamond",serif;
+  font-size:30px;
+  margin-top:30px;
+}
+
+.close{
+  position:absolute;
+  right:20px;
+  top:18px;
+  border:0;
+  background:none;
+  color:#111;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+  opacity .8s ease,
+  transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  .nav{
+    padding:20px;
+  }
+
+  .reserve{
+    display:none;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+
+  .hero{
+    min-height:620px;
+  }
+
+  .hero h1{
+    font-size:23vw;
+    letter-spacing:-2px;
+  }
+
+  .hero-subtitle{
+    font-size:20px;
+  }
+
+  .intro{
+    min-height:65vh;
+    padding:80px 25px;
+  }
+
+  .full-image{
+    width:100%;
+    height:60vh;
+    min-height:450px;
+  }
+
+  .menu-title{
+    padding:90px 22px 40px;
+    display:block;
+  }
+
+  .menu-title h2{
+    font-size:25vw;
+  }
+
+  .menu-title p{
+    margin-top:30px;
+  }
+
+  .categories{
+    padding:0 5px;
+  }
+
+  .cat{
+    padding:18px 15px;
+  }
+
+  .menu-section{
+    padding:80px 22px;
+  }
+
+  .section-top{
+    display:block;
+    margin-bottom:35px;
+  }
+
+  .section-name{
+    margin-top:15px;
+    font-size:55px;
+  }
+
+  .food{
+    padding:23px 0;
+  }
+
+  .food:hover{
+    padding-left:0;
+  }
+
+  .food-name{
+    font-size:29px;
+  }
+
+  .food-description{
+    font-size:9px;
+  }
+
+  .food-price{
+    font-size:18px;
+  }
+
+  .chef-feature{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .chef-image{
+    height:500px;
+  }
+
+  .chef-copy{
+    padding:70px 25px;
+  }
+
+  .chef-copy h2{
+    font-size:60px;
+  }
+
+  .quote{
+    min-height:55vh;
+  }
+
+  .footer-top{
+    grid-template-columns:1fr;
+  }
+
+  .footer-bottom{
+    display:block;
+    line-height:2;
+  }
+
+  .modal-box{
+    display:block;
+  }
+
+  .modal-image{
+    width:100%;
+    height:300px;
+  }
+
+  .modal-content{
+    padding:40px 25px;
+  }
+
+  .modal-content h2{
+    font-size:45px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
+<!-- NAVIGATION -->
 
-  <header class="hero">
+<nav class="nav">
 
-    <div class="language-box">
-      <button class="lang-btn active" onclick="setLanguage('ru',this)">РУС</button>
-      <button class="lang-btn" onclick="setLanguage('kz',this)">ҚАЗ</button>
+  <div class="logo">CASA MIA</div>
+
+  <div class="nav-right">
+
+    <div class="lang">
+      <button class="active" onclick="changeLang('ru',this)">RU</button>
+      <button onclick="changeLang('kz',this)">KZ</button>
     </div>
 
-    <div class="hero-content">
+    <button
+      class="reserve"
+      data-ru="Забронировать"
+      data-kz="Брондау">
+      Забронировать
+    </button>
 
-      <div class="small-title">
-        Italian Restaurant
-      </div>
+  </div>
 
-      <h1>CASA MIA</h1>
+</nav>
 
-      <div class="subtitle">
-        Cucina Italiana
-      </div>
 
-      <div class="location">
-        Шымкент · Казахстан
-      </div>
+<!-- HERO -->
 
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      Cucina Italiana Contemporanea
     </div>
 
-  </header>
+    <h1>CASA MIA</h1>
+
+    <div
+      class="hero-subtitle"
+      data-ru="Италия. Переосмысленная."
+      data-kz="Италия. Жаңа көзқараспен.">
+      Италия. Переосмысленная.
+    </div>
+
+    <div
+      class="hero-location"
+      data-ru="Шымкент · Казахстан"
+      data-kz="Шымкент · Қазақстан">
+      Шымкент · Казахстан
+    </div>
+
+  </div>
+
+  <div class="scroll">
+    SCROLL TO DISCOVER
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
 
 
-  <!-- INTRO -->
+<!-- STORY -->
 
-  <section class="intro">
+<section class="intro">
+
+  <div class="intro-inner reveal">
+
+    <div class="number">01 — LA FILOSOFIA</div>
+
+    <h2
+      data-ru="Итальянская традиция встречает современность."
+      data-kz="Италиялық дәстүр заманауи талғаммен үйлеседі.">
+      Итальянская традиция встречает современность.
+    </h2>
 
     <p
-      data-ru="Настоящий вкус Италии — простые ингредиенты, традиционные рецепты и немного итальянской любви."
-      data-kz="Италияның нағыз дәмі — қарапайым өнімдер, дәстүрлі рецепттер және италиялық махаббат."
-    >
-      Настоящий вкус Италии — простые ингредиенты,
-      традиционные рецепты и немного итальянской любви.
+      data-ru="CASA MIA — современный взгляд на итальянскую гастрономию. Знакомые вкусы, сезонные продукты и простота, доведённая до совершенства."
+      data-kz="CASA MIA — италиялық гастрономияға заманауи көзқарас. Таныс дәмдер, маусымдық өнімдер және мінсіз қарапайымдылық.">
+      CASA MIA — современный взгляд на итальянскую гастрономию.
+      Знакомые вкусы, сезонные продукты и простота,
+      доведённая до совершенства.
     </p>
 
-    <div class="ornament"></div>
+  </div>
 
-  </section>
+</section>
 
 
-  <!-- CATEGORIES -->
+<!-- IMAGE -->
 
-  <div class="category-wrapper">
+<div class="full-image reveal">
 
-    <div class="categories">
+  <img
+    src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1800&q=90"
+    alt="Italian cuisine">
 
-      <button class="category active"
-        onclick="goToSection('antipasti',this)"
-        data-ru="Закуски"
-        data-kz="Тіскебасар">
-        Закуски
-      </button>
+</div>
 
-      <button class="category"
-        onclick="goToSection('pasta',this)"
-        data-ru="Паста"
-        data-kz="Паста">
-        Паста
-      </button>
 
-      <button class="category"
-        onclick="goToSection('pizza',this)"
-        data-ru="Пицца"
-        data-kz="Пицца">
-        Пицца
-      </button>
+<!-- MENU TITLE -->
 
-      <button class="category"
-        onclick="goToSection('secondi',this)"
-        data-ru="Горячее"
-        data-kz="Ыстық тағам">
-        Горячее
-      </button>
+<section class="menu-title reveal">
 
-      <button class="category"
-        onclick="goToSection('dolci',this)"
-        data-ru="Десерты"
-        data-kz="Десерттер">
-        Десерты
-      </button>
+  <h2>MENU</h2>
 
-      <button class="category"
-        onclick="goToSection('drinks',this)"
-        data-ru="Напитки"
-        data-kz="Сусындар">
-        Напитки
-      </button>
+  <p
+    data-ru="Наше меню следует ритму сезона. Каждый ингредиент выбран ради чистоты и выразительности вкуса."
+    data-kz="Біздің мәзір маусым ырғағына сай өзгереді. Әрбір өнім таза әрі айқын дәм үшін таңдалады.">
+    Наше меню следует ритму сезона.
+    Каждый ингредиент выбран ради чистоты
+    и выразительности вкуса.
+  </p>
+
+</section>
+
+
+<!-- CATEGORY NAV -->
+
+<div class="category-bar">
+
+  <div class="categories">
+
+    <button class="cat active"
+      onclick="goSection('antipasti',this)">
+      Antipasti
+    </button>
+
+    <button class="cat"
+      onclick="goSection('pasta',this)">
+      Pasta
+    </button>
+
+    <button class="cat"
+      onclick="goSection('pizza',this)">
+      Pizza
+    </button>
+
+    <button class="cat"
+      onclick="goSection('secondi',this)">
+      Secondi
+    </button>
+
+    <button class="cat"
+      onclick="goSection('dolci',this)">
+      Dolci
+    </button>
+
+    <button class="cat"
+      onclick="goSection('bevande',this)">
+      Bevande
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ANTIPASTI -->
+
+<section class="menu-section" id="antipasti">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">01 / 06</div>
+
+    <div
+      class="section-name"
+      data-ru="Начало"
+      data-kz="Бастау">
+      Начало
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food"
+      onclick="openDish(
+      'Burrata Pugliese',
+      '4 900 ₸',
+      'https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=1000&q=90',
+      'Томаты, буррата, базилик, оливковое масло первого отжима.',
+      'Қызанақ, буррата, базилик және зәйтүн майы.'
+      )">
+
+      <div>
+
+        <div class="food-name">
+          Burrata Pugliese
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Томаты · буррата · базилик · оливковое масло"
+          data-kz="Қызанақ · буррата · базилик · зәйтүн майы">
+          Томаты · буррата · базилик · оливковое масло
+        </div>
+
+        <div
+          class="tag"
+          data-ru="Выбор шефа"
+          data-kz="Шеф таңдауы">
+          Выбор шефа
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        4 900 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Vitello Tonnato
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Телятина · соус тоннато · каперсы · зелень"
+          data-kz="Бұзау еті · тоннато соусы · каперс · көк шөп">
+          Телятина · соус тоннато · каперсы · зелень
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        5 200 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Carpaccio di Manzo
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Говядина · руккола · пармезан · лимон"
+          data-kz="Сиыр еті · руккола · пармезан · лимон">
+          Говядина · руккола · пармезан · лимон
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        5 700 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Bruschetta al Pomodoro
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Томаты · базилик · чеснок · чиабатта"
+          data-kz="Қызанақ · базилик · сарымсақ · чиабатта">
+          Томаты · базилик · чеснок · чиабатта
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        2 900 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CHEF FEATURE -->
+
+<section class="chef-feature reveal">
+
+  <div class="chef-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=90"
+      alt="Chef pasta">
+
+  </div>
+
+  <div class="chef-copy">
+
+    <div
+      class="mini"
+      data-ru="Фирменное блюдо"
+      data-kz="Фирмалық тағам">
+      Фирменное блюдо
+    </div>
+
+    <h2>
+      Tagliolini<br>
+      al Tartufo
+    </h2>
+
+    <p
+      data-ru="Свежая паста ручной работы, сливочное масло, пармезан и аромат трюфеля. Минимум ингредиентов — максимум вкуса."
+      data-kz="Қолдан жасалған балғын паста, сары май, пармезан және трюфель хош иісі. Аз ингредиент — терең дәм.">
+      Свежая паста ручной работы, сливочное масло,
+      пармезан и аромат трюфеля.
+      Минимум ингредиентов — максимум вкуса.
+    </p>
+
+    <div class="chef-price">
+      7 900 ₸
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PASTA -->
+
+<section class="menu-section" id="pasta">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">
+      02 / 06
+    </div>
+
+    <div class="section-name">
+      Pasta Fresca
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Tagliatelle Bolognese
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Свежая паста · рагу из говядины · пармезан"
+          data-kz="Балғын паста · сиыр етінен рагу · пармезан">
+          Свежая паста · рагу из говядины · пармезан
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        5 200 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Ravioli Ricotta e Spinaci
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Рикотта · шпинат · шалфей · сливочное масло"
+          data-kz="Рикотта · шпинат · шалфей · сары май">
+          Рикотта · шпинат · шалфей · сливочное масло
+        </div>
+
+        <div
+          class="tag"
+          data-ru="Vegetarian"
+          data-kz="Vegetarian">
+          Vegetarian
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        4 900 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Linguine ai Gamberi
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Креветки · томаты · чеснок · петрушка"
+          data-kz="Асшаян · қызанақ · сарымсақ · ақжелкен">
+          Креветки · томаты · чеснок · петрушка
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        6 500 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Lasagna della Casa
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Говядина · бешамель · томаты · пармезан"
+          data-kz="Сиыр еті · бешамель · қызанақ · пармезан">
+          Говядина · бешамель · томаты · пармезан
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        5 500 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PIZZA -->
+
+<section class="menu-section" id="pizza">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">
+      03 / 06
+    </div>
+
+    <div class="section-name">
+      Forno
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Margherita
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Томаты · mozzarella fior di latte · базилик"
+          data-kz="Қызанақ · mozzarella fior di latte · базилик">
+          Томаты · mozzarella fior di latte · базилик
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        4 200 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Tartufo
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Моцарелла · грибы · трюфельный крем · пармезан"
+          data-kz="Моцарелла · саңырауқұлақ · трюфель кремі · пармезан">
+          Моцарелла · грибы · трюфельный крем · пармезан
+        </div>
+
+        <div
+          class="tag"
+          data-ru="Выбор шефа"
+          data-kz="Шеф таңдауы">
+          Выбор шефа
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        6 300 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Pollo Affumicato
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Курица · моцарелла · томаты · руккола"
+          data-kz="Тауық еті · моцарелла · қызанақ · руккола">
+          Курица · моцарелла · томаты · руккола
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        5 300 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECOND -->
+
+<section class="menu-section" id="secondi">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">
+      04 / 06
+    </div>
+
+    <div
+      class="section-name"
+      data-ru="Главное"
+      data-kz="Негізгі">
+      Главное
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Filetto di Manzo
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Говяжье филе · картофель · розмарин · jus"
+          data-kz="Сиыр филесі · картоп · розмарин · jus">
+          Говяжье филе · картофель · розмарин · jus
+        </div>
+
+        <div
+          class="tag"
+          data-ru="Chef's Selection"
+          data-kz="Chef's Selection">
+          Chef's Selection
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        9 900 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Pollo alla Toscana
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Куриное филе · шпинат · сливочный соус · томаты"
+          data-kz="Тауық филесі · шпинат · кілегейлі соус · қызанақ">
+          Куриное филе · шпинат · сливочный соус · томаты
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        6 400 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Branzino Mediterraneo
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Сибас · лимон · травы · сезонные овощи"
+          data-kz="Сибас · лимон · шөптер · маусымдық көкөністер">
+          Сибас · лимон · травы · сезонные овощи
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        8 500 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DESSERT -->
+
+<section class="menu-section" id="dolci">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">
+      05 / 06
+    </div>
+
+    <div class="section-name">
+      Dolci
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Tiramisù Casa Mia
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Маскарпоне · эспрессо · какао"
+          data-kz="Маскарпоне · эспрессо · какао">
+          Маскарпоне · эспрессо · какао
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        3 200 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Panna Cotta
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Ваниль · сезонные ягоды · ягодный соус"
+          data-kz="Ваниль · маусымдық жидектер · жидек соусы">
+          Ваниль · сезонные ягоды · ягодный соус
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        2 900 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+
+        <div class="food-name">
+          Fondente
+        </div>
+
+        <div
+          class="food-description"
+          data-ru="Тёмный шоколад · ваниль · лесной орех"
+          data-kz="Қара шоколад · ваниль · орман жаңғағы">
+          Тёмный шоколад · ваниль · лесной орех
+        </div>
+
+      </div>
+
+      <div class="food-price">
+        3 400 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DRINKS -->
+
+<section class="menu-section" id="bevande">
+
+  <div class="section-top reveal">
+
+    <div class="section-number">
+      06 / 06
+    </div>
+
+    <div
+      class="section-name"
+      data-ru="Напитки"
+      data-kz="Сусындар">
+      Напитки
+    </div>
+
+  </div>
+
+  <div class="food-list reveal">
+
+    <div class="food">
+
+      <div>
+        <div class="food-name">Espresso</div>
+        <div class="food-description">100% Arabica</div>
+      </div>
+
+      <div class="food-price">
+        1 200 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+        <div class="food-name">Cappuccino</div>
+
+        <div
+          class="food-description"
+          data-ru="Эспрессо · молоко · нежная молочная пена"
+          data-kz="Эспрессо · сүт · нәзік сүт көбігі">
+          Эспрессо · молоко · нежная молочная пена
+        </div>
+      </div>
+
+      <div class="food-price">
+        1 500 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+        <div class="food-name">Limonata della Casa</div>
+
+        <div
+          class="food-description"
+          data-ru="Лимон · мята · содовая"
+          data-kz="Лимон · жалбыз · газдалған су">
+          Лимон · мята · содовая
+        </div>
+      </div>
+
+      <div class="food-price">
+        1 900 ₸
+      </div>
+
+    </div>
+
+
+    <div class="food">
+
+      <div>
+        <div class="food-name">San Pellegrino</div>
+        <div class="food-description">750 ml</div>
+      </div>
+
+      <div class="food-price">
+        2 400 ₸
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- QUOTE -->
+
+<section class="quote reveal">
+
+  <blockquote>
+
+    “La semplicità è
+    l'ultima sofisticazione.”
+
+    <span>
+      — The philosophy of Casa Mia
+    </span>
+
+  </blockquote>
+
+</section>
+
+
+<!-- RESTAURANT IMAGE -->
+
+<div class="footer-image"></div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-logo">
+        CASA MIA
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div
+        class="footer-label"
+        data-ru="Адрес"
+        data-kz="Мекенжай">
+        Адрес
+      </div>
+
+      <div
+        class="footer-text"
+        data-ru="Шымкент, Казахстан<br>ул. Тестовая, 24"
+        data-kz="Шымкент, Қазақстан<br>Тест көшесі, 24">
+        Шымкент, Казахстан<br>
+        ул. Тестовая, 24
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div
+        class="footer-label"
+        data-ru="Часы работы"
+        data-kz="Жұмыс уақыты">
+        Часы работы
+      </div>
+
+      <div
+        class="footer-text"
+        data-ru="Пн — Вс<br>12:00 — 00:00"
+        data-kz="Дс — Жс<br>12:00 — 00:00">
+        Пн — Вс<br>
+        12:00 — 00:00
+      </div>
 
     </div>
 
   </div>
 
 
-  <main class="menu">
+  <div class="footer-bottom">
 
-
-    <!-- ANTIPASTI -->
-
-    <section class="section" id="antipasti">
-
-      <div class="section-header">
-        <span>Antipasti</span>
-
-        <h2
-          data-ru="Закуски"
-          data-kz="Тіскебасар">
-          Закуски
-        </h2>
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=700&q=80"
-          alt="Bruschetta">
-
-          <div class="card-content">
-
-            <h3>Bruschetta</h3>
-
-            <p class="description"
-              data-ru="Хрустящий хлеб, томаты, базилик, чеснок и оливковое масло."
-              data-kz="Қытырлақ нан, қызанақ, базилик, сарымсақ және зәйтүн майы.">
-              Хрустящий хлеб, томаты, базилик, чеснок и оливковое масло.
-            </p>
-
-            <div class="price">2 490 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=700&q=80"
-          alt="Caprese">
-
-          <div class="card-content">
-
-            <h3>Caprese</h3>
-
-            <p class="description"
-              data-ru="Томаты, моцарелла, свежий базилик и оливковое масло."
-              data-kz="Қызанақ, моцарелла, балғын базилик және зәйтүн майы.">
-              Томаты, моцарелла, свежий базилик и оливковое масло.
-            </p>
-
-            <div class="price">3 290 ₸</div>
-
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- PASTA -->
-
-    <section class="section" id="pasta">
-
-      <div class="section-header">
-
-        <span>Pasta Fresca</span>
-
-        <h2
-          data-ru="Паста"
-          data-kz="Паста">
-          Паста
-        </h2>
-
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=80"
-          alt="Fettuccine">
-
-          <div class="card-content">
-
-            <h3>Fettuccine Alfredo</h3>
-
-            <p class="description"
-              data-ru="Феттучини в нежном сливочном соусе с пармезаном."
-              data-kz="Пармезан қосылған нәзік кілегейлі соустағы феттучини.">
-              Феттучини в нежном сливочном соусе с пармезаном.
-            </p>
-
-            <div class="price">4 490 ₸</div>
-
-          </div>
-
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=700&q=80"
-          alt="Pasta">
-
-          <div class="card-content">
-
-            <h3>Spaghetti Carbonara</h3>
-
-            <p class="description"
-              data-ru="Спагетти, сливочный соус, говядина, яйцо и пармезан."
-              data-kz="Спагетти, кілегейлі соус, сиыр еті, жұмыртқа және пармезан.">
-              Спагетти, сливочный соус, говядина, яйцо и пармезан.
-            </p>
-
-            <div class="price">4 290 ₸</div>
-
-          </div>
-
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=700&q=80"
-          alt="Pasta">
-
-          <div class="card-content">
-
-            <h3>Tagliatelle Bolognese</h3>
-
-            <p class="description"
-              data-ru="Тальятелле с насыщенным томатным соусом и говядиной."
-              data-kz="Қызанақ соусы мен сиыр еті қосылған тальятелле.">
-              Тальятелле с насыщенным томатным соусом и говядиной.
-            </p>
-
-            <div class="price">4 590 ₸</div>
-
-          </div>
-
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- PIZZA -->
-
-    <section class="section" id="pizza">
-
-      <div class="section-header">
-
-        <span>Forno Italiano</span>
-
-        <h2
-          data-ru="Пицца"
-          data-kz="Пицца">
-          Пицца
-        </h2>
-
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=80"
-          alt="Pizza Margherita">
-
-          <div class="card-content">
-
-            <h3>Margherita</h3>
-
-            <p class="description"
-              data-ru="Томатный соус, моцарелла, базилик и оливковое масло."
-              data-kz="Қызанақ соусы, моцарелла, базилик және зәйтүн майы.">
-              Томатный соус, моцарелла, базилик и оливковое масло.
-            </p>
-
-            <div class="price">3 990 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=700&q=80"
-          alt="Italian Pizza">
-
-          <div class="card-content">
-
-            <h3>Pollo & Funghi</h3>
-
-            <p class="description"
-              data-ru="Моцарелла, курица, шампиньоны и фирменный томатный соус."
-              data-kz="Моцарелла, тауық еті, саңырауқұлақ және қызанақ соусы.">
-              Моцарелла, курица, шампиньоны и фирменный томатный соус.
-            </p>
-
-            <div class="price">4 790 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=80"
-          alt="Pizza">
-
-          <div class="card-content">
-
-            <h3>Quattro Formaggi</h3>
-
-            <p class="description"
-              data-ru="Моцарелла и сочетание итальянских сыров на тонком тесте."
-              data-kz="Жұқа қамырдағы моцарелла және италиялық ірімшіктер үйлесімі.">
-              Моцарелла и сочетание итальянских сыров на тонком тесте.
-            </p>
-
-            <div class="price">4 990 ₸</div>
-
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- SECOND -->
-
-    <section class="section" id="secondi">
-
-      <div class="section-header">
-
-        <span>Secondi</span>
-
-        <h2
-          data-ru="Горячие блюда"
-          data-kz="Ыстық тағамдар">
-          Горячие блюда
-        </h2>
-
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"
-          alt="Chicken">
-
-          <div class="card-content">
-
-            <h3>Pollo alla Toscana</h3>
-
-            <p class="description"
-              data-ru="Нежное куриное филе в сливочном соусе с овощами."
-              data-kz="Көкөністер мен кілегейлі соуста дайындалған тауық еті.">
-              Нежное куриное филе в сливочном соусе с овощами.
-            </p>
-
-            <div class="price">5 490 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=700&q=80"
-          alt="Beef">
-
-          <div class="card-content">
-
-            <h3>Filetto di Manzo</h3>
-
-            <p class="description"
-              data-ru="Сочное филе говядины с овощами и ароматными травами."
-              data-kz="Көкөністер және хош иісті шөптермен ұсынылатын сиыр еті.">
-              Сочное филе говядины с овощами и ароматными травами.
-            </p>
-
-            <div class="price">7 990 ₸</div>
-
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- DESSERT -->
-
-    <section class="section" id="dolci">
-
-      <div class="section-header">
-
-        <span>Dolci</span>
-
-        <h2
-          data-ru="Десерты"
-          data-kz="Десерттер">
-          Десерты
-        </h2>
-
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=700&q=80"
-          alt="Tiramisu">
-
-          <div class="card-content">
-
-            <h3>Tiramisù</h3>
-
-            <p class="description"
-              data-ru="Классический итальянский десерт с кремом маскарпоне и кофе."
-              data-kz="Маскарпоне кремі мен кофе қосылған классикалық италиялық десерт.">
-              Классический итальянский десерт с кремом маскарпоне и кофе.
-            </p>
-
-            <div class="price">2 590 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80"
-          alt="Panna cotta">
-
-          <div class="card-content">
-
-            <h3>Panna Cotta</h3>
-
-            <p class="description"
-              data-ru="Нежный сливочный десерт с ягодным соусом."
-              data-kz="Жидек соусымен ұсынылатын нәзік кілегейлі десерт.">
-              Нежный сливочный десерт с ягодным соусом.
-            </p>
-
-            <div class="price">2 390 ₸</div>
-
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-    <!-- DRINKS -->
-
-    <section class="section" id="drinks">
-
-      <div class="section-header">
-
-        <span>Bevande</span>
-
-        <h2
-          data-ru="Напитки"
-          data-kz="Сусындар">
-          Напитки
-        </h2>
-
-      </div>
-
-      <div class="grid">
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80"
-          alt="Coffee">
-
-          <div class="card-content">
-
-            <h3>Cappuccino</h3>
-
-            <p class="description"
-              data-ru="Классический итальянский кофе с нежной молочной пеной."
-              data-kz="Нәзік сүт көбігі қосылған классикалық италиялық кофе.">
-              Классический итальянский кофе с нежной молочной пеной.
-            </p>
-
-            <div class="price">1 290 ₸</div>
-
-          </div>
-        </article>
-
-
-        <article class="card">
-
-          <img class="card-image"
-          src="https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9d?auto=format&fit=crop&w=700&q=80"
-          alt="Lemonade">
-
-          <div class="card-content">
-
-            <h3>Limonata</h3>
-
-            <p class="description"
-              data-ru="Домашний лимонад со свежим лимоном и мятой."
-              data-kz="Балғын лимон және жалбыз қосылған үй лимонады.">
-              Домашний лимонад со свежим лимоном и мятой.
-            </p>
-
-            <div class="price">1 490 ₸</div>
-
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-  </main>
-
-
-  <footer>
-
-    <h2>CASA MIA</h2>
-
-    <p
-      data-ru="Итальянская кухня · Шымкент, Казахстан<br>Ежедневно 10:00 — 00:00"
-      data-kz="Италиялық асхана · Шымкент, Қазақстан<br>Күн сайын 10:00 — 00:00">
-      Итальянская кухня · Шымкент, Казахстан<br>
-      Ежедневно 10:00 — 00:00
-    </p>
-
-    <div class="italy">
-      Buon appetito!
+    <div>
+      © 2026 CASA MIA
     </div>
 
-  </footer>
+    <div>
+      CUCINA ITALIANA CONTEMPORANEA
+    </div>
+
+  </div>
+
+</footer>
 
 
-  <script>
+<!-- DISH MODAL -->
 
-    let currentLanguage = "ru";
+<div class="modal" id="dishModal" onclick="closeOutside(event)">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeDish()">
+      ×
+    </button>
+
+    <img
+      class="modal-image"
+      id="modalImage"
+      src=""
+      alt="Dish">
+
+    <div class="modal-content">
+
+      <div
+        class="modal-label"
+        data-ru="CASA MIA · Меню"
+        data-kz="CASA MIA · Мәзір">
+        CASA MIA · Меню
+      </div>
+
+      <h2 id="modalName"></h2>
+
+      <p id="modalDescription"></p>
+
+      <div
+        class="modal-price"
+        id="modalPrice">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 
-    function setLanguage(lang, button) {
+<script>
 
-      currentLanguage = lang;
-
-      document
-        .querySelectorAll(".lang-btn")
-        .forEach(btn => btn.classList.remove("active"));
-
-      button.classList.add("active");
+let language = "ru";
 
 
-      document
-        .querySelectorAll("[data-ru]")
-        .forEach(element => {
+/* LANGUAGE */
 
-          const value = element.dataset[lang];
+function changeLang(lang,button){
 
-          if (!value) return;
+  language = lang;
 
-          if (value.includes("<br>")) {
-            element.innerHTML = value;
-          } else {
-            element.textContent = value;
-          }
+  document
+    .querySelectorAll(".lang button")
+    .forEach(btn => btn.classList.remove("active"));
 
-        });
+  button.classList.add("active");
+
+
+  document
+    .querySelectorAll("[data-ru]")
+    .forEach(el => {
+
+      const value = el.dataset[lang];
+
+      if(!value) return;
+
+      if(value.includes("<br>")){
+        el.innerHTML = value;
+      }else{
+        el.textContent = value;
+      }
+
+    });
+
+}
+
+
+/* MENU NAVIGATION */
+
+function goSection(id,button){
+
+  document
+    .querySelectorAll(".cat")
+    .forEach(cat => cat.classList.remove("active"));
+
+  button.classList.add("active");
+
+  document
+    .getElementById(id)
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* DISH MODAL */
+
+function openDish(name,price,image,ru,kz){
+
+  document.getElementById("modalName").textContent = name;
+
+  document.getElementById("modalPrice").textContent = price;
+
+  document.getElementById("modalImage").src = image;
+
+  document.getElementById("modalDescription").textContent =
+    language === "ru" ? ru : kz;
+
+  document.getElementById("dishModal").classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeDish(){
+
+  document.getElementById("dishModal").classList.remove("show");
+
+  document.body.style.overflow = "";
+
+}
+
+
+function closeOutside(event){
+
+  if(event.target.id === "dishModal"){
+    closeDish();
+  }
+
+}
+
+
+/* SCROLL REVEAL */
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if(entry.isIntersecting){
+
+      entry.target.classList.add("visible");
+
+      observer.unobserve(entry.target);
 
     }
 
+  });
 
-    function goToSection(id, button) {
-
-      document
-        .querySelectorAll(".category")
-        .forEach(item => item.classList.remove("active"));
-
-      button.classList.add("active");
+},{
+  threshold:.12
+});
 
 
-      const section = document.getElementById(id);
+document
+  .querySelectorAll(".reveal")
+  .forEach(el => observer.observe(el));
 
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
 
-    }
+/* ESC CLOSE */
 
-  </script>
+document.addEventListener("keydown",event => {
+
+  if(event.key === "Escape"){
+    closeDish();
+  }
+
+});
+
+</script>
 
 </body>
 </html>
